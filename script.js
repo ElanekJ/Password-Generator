@@ -93,12 +93,16 @@ var upperCasedCharacters = [
 function getPasswordOptions() {
 
   // choice how many characters
-  //let characters = prompt("How many characters you want to generate? ", " ");
-  //let howManyCharacters = parseInt(characters);
-  //console.log(howManyCharacters);
+  let characters = confirmCharacter();
+  let howManyCharacters = parseInt(characters);
+
+  console.log(howManyCharacters);
 
   // Upper case characters
-  //confirm("do you want upercase?")
+  if(confirm("Do you want include upercase characters?")){
+    let uperCaseValue = prompt("How many characters you want ")
+  }
+  
 
   // Lower case characters
 
@@ -106,6 +110,9 @@ function getPasswordOptions() {
   
 }
 
+function confirmCharacter(){
+  return prompt("How many characters you want to generate? ", " ");
+}
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -118,10 +125,6 @@ function getRandommElement(gre){
   const randomIndex = getRandom(gre.length);
   return gre[randomIndex]
 }
-
-console.log(getRandommElement(upperCasedCharacters))
-console.log(getRandommElement(lowerCasedCharacters))
-console.log(getRandommElement(numericCharacters))
 
 
 // Function to generate password with user input
