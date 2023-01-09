@@ -88,18 +88,45 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+ 
 // Function to prompt user for password options
 function getPasswordOptions() {
 
+  // choice how many characters
+  //let characters = prompt("How many characters you want to generate? ", " ");
+  //let howManyCharacters = parseInt(characters);
+  //console.log(howManyCharacters);
+
+  // Upper case characters
+  //confirm("do you want upercase?")
+
+  // Lower case characters
+
+
+  
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
 
+  return Math.floor(Math.random()*arr);
+
 }
+
+function getRandommElement(gre){
+  const randomIndex = getRandom(gre.length);
+  return gre[randomIndex]
+}
+
+console.log(getRandommElement(upperCasedCharacters))
+console.log(getRandommElement(lowerCasedCharacters))
+console.log(getRandommElement(numericCharacters))
+
 
 // Function to generate password with user input
 function generatePassword() {
+ 
 
 }
 
@@ -116,3 +143,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+//
