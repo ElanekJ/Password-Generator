@@ -88,48 +88,68 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+let lowerCaseValue = 0;
+let uperCaseValue = 0;
+let numericValue = 0;
+let specialCharValue =0;
+
  
 // Function to prompt user for password options
 function getPasswordOptions() {
+
+  //Set maximum characters
   let restCharacters = 64;
 
-  // choice how many characters
-  let characters = confirmCharacter(restCharacters);
+  //Choose characters and how many
+  let characters = confirmCharacter(10, restCharacters);
   let howManyCharacters = parseInt(characters);
   restCharacters = howManyCharacters
   console.log(howManyCharacters);
 
-  //Choose characters
-  if(confirm("Do you want include numeric characters?")){
-    let numericValue = confirmCharacter(restCharacters);
-    restCharacters -= numericValue;
-    console.log(restCharacters);
+  if(howManyCharacters >=10 && howManyCharacters <= 64){
+
+    if(confirm("Do you want include numeric characters?")){
+      numericValue = confirmCharacter(1,restCharacters);
+      restCharacters -= numericValue;
+    }
+
+    if(confirm("Do you want include lowercase characters?")){
+      lowerCaseValue = confirmCharacter(1,restCharacters);
+      restCharacters -= lowerCaseValue;
+    }
+
+    if(confirm("Do you want include upercase characters?")){
+      uperCaseValue = confirmCharacter(1,restCharacters);
+      restCharacters -= uperCaseValue;
+    }
+
+    if(confirm("Do you want include special characters?")){
+      specialCharValue = restCharacters;
+    }
+    else{
+      alert("You have not used all characters, it will be add to numeric characters");
+      numericValue +=restCharacters;
+    }
+    return howManyCharacters;
+
   }
 
-
-  if(confirm("Do you want include lowercase characters?")){
-    let lowerCaseValue = confirmCharacter(restCharacters);
-    restCharacters -= lowerCaseValue;
-    console.log(restCharacters);
+  else if(howManyCharacters>64){
+    alert("TOO MANY CHARACTERS")
+    return 0;
   }
-
-  if(confirm("Do you want include upercase characters?")){
-    let uperCaseValue = confirmCharacter(restCharacters);
-    restCharacters -= uperCaseValue;
-    console.log(restCharacters);
-  }
-  if(confirm("Do you want include special characters?")){
-    let specialCharValue = confirmCharacter(restCharacters);
-    restCharacters -= specialCharValue;
-    console.log(restCharacters);
+  
+  else{
+    alert(" It has to be minimum 10 characters ")
+    return 0;
   }
 }
 
-function confirmCharacter(num){
-   let choiceNumber = prompt("How many characters you want to generate? Choose between 1 - "+num, " ");
-  
+function confirmCharacter(num1,num2){
+  let choiceNumber = prompt("How many characters you want to generate? Choose between "+num1+" - "+num2, " ");
   return parseInt(choiceNumber);
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -143,11 +163,36 @@ function getRandommElement(gre){
   return gre[randomIndex]
 }
 
+function loopThroughCharacters(charAmount, charValue){
+  let element = [];
+  for (let i = 0; i < charAmount; i++) {
+    element[i] = getRandommElement(charValue);
+    
+  }
+  alert(element);
+  return element;
+}
+
 
 // Function to generate password with user input
 function generatePassword() {
  
-  console.log(getPasswordOptions.lowerCaseValue)
+  let amountOfCharacters = getPasswordOptions();
+  if(amountOfCharacters !== 0 ){
+    let characterLoopedNum = loopThroughCharacters(numericValue,numericCharacters);
+    let characterLoopedLow = loopThroughCharacters(lowerCaseValue,lowerCasedCharacters);
+    let characterLoopedUp = loopThroughCharacters(uperCaseValue,upperCasedCharacters);
+    let characterLoopedSpec = loopThroughCharacters(specialCharValue,specialCharacters);
+    let characterLooped = characterLoopedNum;
+    characterLooped = characterLooped.concat(characterLoopedLow);
+    characterLooped = characterLooped.concat(characterLoopedUp);
+    characterLooped = characterLooped.concat(characterLoopedSpec);
+    
+    return characterLooped;
+  }
+  else{
+    return "Have a lovely day";
+  }
 }
 
 // Get references to the #generate element
@@ -155,7 +200,8 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  getPasswordOptions();
+
+  //  getPasswordOptions();
   var password = generatePassword();
   var passwordText = document.querySelector('#password');
 
