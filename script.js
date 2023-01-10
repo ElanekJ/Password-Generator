@@ -106,6 +106,7 @@ function getPasswordOptions() {
   restCharacters = howManyCharacters
   console.log(howManyCharacters);
 
+  //Make sure the password is between 10 - 64 characters
   if(howManyCharacters >=10 && howManyCharacters <= 64){
 
     if(confirm("Do you want include numeric characters?")){
@@ -145,6 +146,7 @@ function getPasswordOptions() {
   }
 }
 
+//Choose no of characters
 function confirmCharacter(num1,num2){
   let choiceNumber = prompt("How many characters you want to generate? Choose between "+num1+" - "+num2, " ");
   return parseInt(choiceNumber);
@@ -163,13 +165,13 @@ function getRandommElement(gre){
   return gre[randomIndex]
 }
 
+// For loop through characters
 function loopThroughCharacters(charAmount, charValue){
   let element = [];
   for (let i = 0; i < charAmount; i++) {
     element[i] = getRandommElement(charValue);
     
   }
-  alert(element);
   return element;
 }
 
