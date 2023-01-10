@@ -104,6 +104,7 @@ function getPasswordOptions() {
   let characters = confirmCharacter(10, restCharacters);
   let howManyCharacters = parseInt(characters);
   restCharacters = howManyCharacters
+
   console.log(howManyCharacters);
 
   //Make sure the password is between 10 - 64 characters
@@ -111,20 +112,30 @@ function getPasswordOptions() {
 
     if(confirm("Do you want include numeric characters?")){
       numericValue = confirmCharacter(1,restCharacters);
+      if(checkList(numericValue,restCharacters)){
+        numericValue = confirmCharacter(1,restCharacters);
+      }
       restCharacters -= numericValue;
     }
 
     if(confirm("Do you want include lowercase characters?")){
       lowerCaseValue = confirmCharacter(1,restCharacters);
+      if(checkList(lowerCaseValue,restCharacters)){
+        lowerCaseValue = confirmCharacter(1,restCharacters);
+      }
       restCharacters -= lowerCaseValue;
     }
 
     if(confirm("Do you want include upercase characters?")){
       uperCaseValue = confirmCharacter(1,restCharacters);
+      if(checkList(uperCaseValue,restCharacters)){
+        uperCaseValue = confirmCharacter(1,restCharacters);
+      }
       restCharacters -= uperCaseValue;
     }
 
     if(confirm("Do you want include special characters?")){
+      
       specialCharValue = restCharacters;
     }
     else{
@@ -150,6 +161,14 @@ function getPasswordOptions() {
 function confirmCharacter(num1,num2){
   let choiceNumber = prompt("How many characters you want to generate? Choose between "+num1+" - "+num2, " ");
   return parseInt(choiceNumber);
+}
+
+//Checking number of characters
+function checkList(num1,num2){
+  if(num1 > num2){
+    alert("YOU SELECTED TOO MANY CHARACTERS ");
+    return true;
+  }
 }
 
 
